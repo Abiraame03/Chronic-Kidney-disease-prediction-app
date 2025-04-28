@@ -35,5 +35,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           app_file: app.py # Replace with the name of your Streamlit app file
-          requirements_file: requirements.txt
+          requirements_file: /workspaces/Chronic-Kidney-disease-prediction-app/requirements.txt
           streamlit_version: 'latest' # Or specify a version
