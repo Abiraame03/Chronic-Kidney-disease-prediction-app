@@ -1,0 +1,39 @@
+name: Streamlit App CI/CD
+
+on:
+  push:
+    branches: [ main ] # Trigger on pushes to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run basic app check (optional)
+        run: |
+          python app.py --version # Or a simple script to check import errors
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' # Only deploy on pushes to main branch
+    steps:
+      - name: Deploy to Streamlit Cloud
+        uses: streamlit/deploy-app@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          app_file: app.py # Replace with the name of your Streamlit app file
+          requirements_file: requirements.txt
+          streamlit_version: 'latest' # Or specify a version
