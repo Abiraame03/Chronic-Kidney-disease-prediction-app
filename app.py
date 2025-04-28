@@ -5,7 +5,6 @@ import numpy as np
 # Load the saved model
 with open("kidney_disease_model.pkl", "rb") as model_file:
     model = pickle.load(model_file)
-
 # Load the scaler
 with open("scaler.pkl", "rb") as scaler_file:
     scaler = pickle.load(scaler_file)
