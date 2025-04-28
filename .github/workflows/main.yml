@@ -28,12 +28,12 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' # Only deploy on pushes to main branch
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Deploy to Streamlit Cloud
-        uses: streamlit/deploy-app@v1
+        uses: streamlit/deploy-app@v1.3.0 # Example: Replace with a specific version
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          app_file: app.py # Replace with the name of your Streamlit app file
-          requirements_file: /workspaces/Chronic-Kidney-disease-prediction-app/requirements.txt
-          streamlit_version: 'latest' # Or specify a version
+          app_file: app.py
+          requirements_file: requirements.txt
+          streamlit_version: 'latest'
